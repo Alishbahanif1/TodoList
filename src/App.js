@@ -1,39 +1,3 @@
-// import { useState } from "react";
-// import './App.css';
-
-// function App() {
-//  const[veg,setVeg]=useState([]);
-//  const[newVeg,setNewVeg]=useState();
-
-
-//  function handleSetVeg(event){
-//   setNewVeg(event.target.value);
- 
-//  }
-//  function handleSetVegBtn(){
-// setVeg((prev) => [...prev,newVeg]);
-// setNewVeg(" ")
-
-//  }
- 
-//   return (
-//     <>
-//     <input type="text" value={newVeg} onFocus={()} onChange={handleSetVeg}></input>
-//     <input type="Button" value="Add" onClick={handleSetVegBtn} ></input>  
-//     <h1>Vegetable List</h1>
-//     <ol>
-//       {
-//       veg.map((item)=>{
-//   return <li>{item}</li>
-//       })
-//      }
-//     </ol>
-//     </>
-   
-//   );
-// }
-
-// export default App;
 import { useState } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,7 +10,7 @@ function App() {
  const[qty,setQty]=useState(.1);
  const [editId, setEditId] = useState(null);
  const[vegetables,setVegetables]=useState([])
-
+ const [isFormVisible, setIsFormVisible] = useState(false);
 
  function handleName(event){
   setName(event.target.value);
@@ -79,6 +43,7 @@ function App() {
 setName("")
 setQty('0.1')
 setRate('0.1')
+setIsFormVisible(false)
 
 
  }
@@ -90,7 +55,7 @@ setRate('0.1')
     setQty(veg.qty)
     setRate(veg.rate)
     setEditId(veg.id)
-
+    setIsFormVisible(true)
   }
 
  }
@@ -109,8 +74,12 @@ let total=0;
 
 
   return (
-    
+
+
     <div className="container mt-5 ">
+          <button className="btn btn-dark mb-3 mx-auto d-block " onClick={() => setIsFormVisible(true)}     >
+    Add Vegetable</button>
+  {isFormVisible && (
       
       <div className="formControl  mx-auto mt-5 mb-5">
 <h1 className="mt-5 mb-5 text-center">Add Veggies</h1>  
@@ -125,7 +94,7 @@ let total=0;
     </div>
     <div className="flex-fill"></div>
     </div>
-    </div>
+    </div>)}
     <h3 className="mt-5 mb-5 text-center">Vegetable List</h3>
 
     <table className=" container mb-5 " >
